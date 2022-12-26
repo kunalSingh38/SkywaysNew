@@ -3,11 +3,13 @@ import 'dart:io';
 import 'dart:isolate';
 import 'dart:ui';
 import 'package:dio/dio.dart';
-import 'package:ext_storage/ext_storage.dart';
+// import 'package:ext_storage/ext_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 // import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:open_file/open_file.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:skyways_group/api/api_service.dart';
@@ -84,17 +86,17 @@ class _SalarySlipScreenState extends State<SalarySlipScreen> {
     // TODO: implement initState
     super.initState();
     _getCurrentYear();
-    // _getDirectory();
-    // IsolateNameServer.registerPortWithName(
-    //     _port.sendPort, 'downloader_send_port');
-    // _port.listen((dynamic data) {
-    //   String id = data[0];
-    //   DownloadTaskStatus status = data[1];
-    //   int progress = data[2];
-    //   setState(() {});
-    // });
+    _getDirectory();
+    IsolateNameServer.registerPortWithName(
+        _port.sendPort, 'downloader_send_port');
+    _port.listen((dynamic data) {
+      String id = data[0];
+      DownloadTaskStatus status = data[1];
+      int progress = data[2];
+      setState(() {});
+    });
 
-    // FlutterDownloader.registerCallback(downloadCallback);
+    FlutterDownloader.registerCallback(downloadCallback);
   }
 
   ReceivePort _port = ReceivePort();
@@ -104,26 +106,26 @@ class _SalarySlipScreenState extends State<SalarySlipScreen> {
     super.dispose();
   }
 
-  // static void downloadCallback(
-  //     String id, DownloadTaskStatus status, int progress) {
-  //   final SendPort send =
-  //       IsolateNameServer.lookupPortByName('downloader_send_port');
-  //   send.send([id, status, progress]);
-  // }
+  static void downloadCallback(
+      String id, DownloadTaskStatus status, int progress) {
+    final SendPort send =
+        IsolateNameServer.lookupPortByName('downloader_send_port');
+    send.send([id, status, progress]);
+  }
 
-  // _getDirectory() async {
-  //   if (Platform.isAndroid) {
-  //     final baseStorage = await getExternalStorageDirectory();
-  //     setState(() {
-  //       _saveDir = baseStorage.path;
-  //     });
-  //   } else {
-  //     final baseStorage = await getApplicationDocumentsDirectory();
-  //     setState(() {
-  //       _saveDir = baseStorage.path;
-  //     });
-  //   }
-  // }
+  _getDirectory() async {
+    if (Platform.isAndroid) {
+      final baseStorage = await getExternalStorageDirectory();
+      setState(() {
+        _saveDir = baseStorage.path;
+      });
+    } else {
+      final baseStorage = await getApplicationDocumentsDirectory();
+      setState(() {
+        _saveDir = baseStorage.path;
+      });
+    }
+  }
 
   _getCurrentYear() {
     DateTime selectedDate = DateTime.now();
@@ -403,7 +405,7 @@ class _SalarySlipScreenState extends State<SalarySlipScreen> {
             SizedBox(width: 5.0),
             GestureDetector(
               onTap: () async {
-                // _setPath(filepath);
+                _setPath(filepath);
                 // _requestDownload(filepath);
               },
               child: Container(
@@ -441,6 +443,7 @@ class _SalarySlipScreenState extends State<SalarySlipScreen> {
       Uri.parse(BASE_URL + salarysliplistUrl),
       body: body,
     );
+    print(jsonDecode(response.body)['data']);
     if (response.statusCode == 200) {
       Iterable list = json.decode(response.body)['data'];
       salarysliplist = list.map((m) => SalarySlipData.fromJson(m)).toList();
@@ -452,33 +455,60 @@ class _SalarySlipScreenState extends State<SalarySlipScreen> {
     }
   }
 
-  // void _setPath(String filepath) async {
-  //   bool permissionAccess = false;
-  //   if (await Permission.storage.request().isGranted) {
-  //     setState(() {
-  //       permissionAccess = true;
-  //     });
-  //   }
-  //   if (await Permission.manageExternalStorage.request().isGranted) {
-  //     setState(() {
-  //       permissionAccess = true;
-  //     });
-  //   }
+  void _setPath(String filepath) async {
+    bool permissionAccess = false;
+    if (await Permission.storage.request().isGranted) {
+      setState(() {
+        permissionAccess = true;
+      });
+    }
+    if (await Permission.manageExternalStorage.request().isGranted) {
+      setState(() {
+        permissionAccess = true;
+      });
+    }
 
-  //   if (permissionAccess) {
-  //     final externalDir = await getExternalStorageDirectory();
-  //     String fileName = DateTime.now().toString() + ".pdf";
-  //     final id = await FlutterDownloader.enqueue(
-  //         url: filepath,
-  //         savedDir: externalDir.path,
-  //         fileName: fileName,
-  //         showNotification: true,
-  //         openFileFromNotification: true);
+    if (permissionAccess) {
+      final externalDir = Platform.isAndroid
+          ? await getExternalStorageDirectory()
+          : await getApplicationDocumentsDirectory();
+      String fileName = DateTime.now().toString() + ".pdf";
+      print(externalDir.path + "/" + fileName);
+      final id = await FlutterDownloader.enqueue(
+          url: filepath,
+          savedDir: externalDir.path,
+          fileName: fileName,
+          showNotification: true,
+          openFileFromNotification: true);
+      if (id.isNotEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("File Downloaded"),
+          ),
+        );
+        showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: Text("View Downloaded File"),
+                  actions: [
+                    TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text("Cancel")),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          OpenFile.open(externalDir.path + "/" + fileName);
+                        },
+                        child: Text("View"))
+                  ],
+                ));
+      }
 
-  //     print(id.toString());
+      // print(id.toString());
 
-  //     print(externalDir.path + "/" + fileName);
-  //   }
-  // }
-
+      // print(externalDir.path + "/" + fileName);
+    }
+  }
 }

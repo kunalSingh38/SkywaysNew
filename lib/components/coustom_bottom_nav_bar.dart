@@ -22,18 +22,14 @@ class CustomBottomNavBar extends StatelessWidget {
       decoration: BoxDecoration(
           color: bottomBarColor,
           borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(25),
-              topRight: Radius.circular(25)
-          ),
+              topLeft: Radius.circular(25), topRight: Radius.circular(25)),
           boxShadow: [
             BoxShadow(
                 color: shadowColor.withOpacity(0.1),
                 blurRadius: 1,
                 spreadRadius: 1,
-                offset: Offset(1, 1)
-            )
-          ]
-      ),
+                offset: Offset(1, 1))
+          ]),
       child: Padding(
           padding: const EdgeInsets.only(left: 25, right: 25, bottom: 15),
           child: Row(
@@ -47,9 +43,9 @@ class CustomBottomNavBar extends StatelessWidget {
                         : inActiveIconColor,
                   ),
                   onPressed: () {
-                        Navigator.pop(context);
-                       //Navigator.pushNamed(context, '/homescreen');
-                      //Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+                    // Navigator.pop(context);
+                    Navigator.pushNamed(context, '/homescreen');
+                    //Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
                   }),
               IconButton(
                 icon: SvgPicture.asset('assets/svg/search.svg'),
@@ -68,32 +64,29 @@ class CustomBottomNavBar extends StatelessWidget {
                 ),
               ),
               IconButton(
-                  icon: Icon(Icons.notification_add,
+                  icon: Icon(
+                    Icons.notification_add,
                     color: MenuState.notification == selectedMenu
                         ? kPrimaryColor
                         : inActiveIconColor,
                   ),
                   onPressed: () {
                     Navigator.pushNamed(context, '/notificationscreen');
-                  }
-
-              ),
+                  }),
               IconButton(
-                  icon: Icon(Icons.person,
+                  icon: Icon(
+                    Icons.person,
                     color: MenuState.profile == selectedMenu
                         ? kPrimaryColor
                         : inActiveIconColor,
                   ),
                   onPressed: () {
-                        //Navigator.pop(context);
-                       Navigator.pushNamed(context, '/profilescreen');
-                       //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ProfileScreen()));
-                  }
-
-              ),
+                    //Navigator.pop(context);
+                    Navigator.pushNamed(context, '/profilescreen');
+                    //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ProfileScreen()));
+                  }),
             ],
-          )
-      ),
+          )),
     );
   }
 }

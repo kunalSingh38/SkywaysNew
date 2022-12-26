@@ -213,19 +213,20 @@ class _EmployeeDirectoryScreenState extends State<EmployeeDirectoryScreen> {
                         //   });*/
                         // },
                         onChanged: (val) {
-                          if (val.length == 0) {
-                            FocusScope.of(context).unfocus();
-                            setState(() {
-                              _searchResult.clear();
-                              _searchResult.addAll(_emplist);
-                              isListing = true;
-                            });
-                          }
-                        },
-                        onEditingComplete: () {
-                          FocusScope.of(context).unfocus();
+                          //   if (val.length == 0) {
+                          //     FocusScope.of(context).unfocus();
+                          //     setState(() {
+                          //       _searchResult.clear();
+                          //       _searchResult.addAll(_emplist);
+                          //       isListing = true;
+                          //     });
+                          //   }
+                          // },
+                          // onEditingComplete: () {
+                          // FocusScope.of(context).unfocus();
                           setState(() {
                             counter = 0;
+                            _searchResult.clear();
                           });
                           if (searchText.text.toString().trim().isEmpty ||
                               searchText.text.toString().toString().length ==
@@ -251,48 +252,48 @@ class _EmployeeDirectoryScreenState extends State<EmployeeDirectoryScreen> {
                         },
                         cursorColor: kPrimaryColor,
                       )),
-                      InkWell(
-                        onTap: () {
-                          FocusScope.of(context).unfocus();
-                          setState(() {
-                            counter = 0;
-                          });
-                          if (searchText.text.toString().trim().isEmpty ||
-                              searchText.text.toString().toString().length ==
-                                  0) {
-                            FocusScope.of(context).unfocus();
-                            setState(() {
-                              _searchResult.clear();
-                              _searchResult.addAll(_emplist);
-                              isListing = true;
-                            });
-                          } else {
-                            setState(() {
-                              isListing = false;
-                            });
-                            if (searchText.text.contains(RegExp(r'[0-9]'))) {
-                              employeelistbynameormobile(
-                                  "", searchText.text.toString());
-                            } else {
-                              employeelistbynameormobile(
-                                  searchText.text.toString(), "");
-                            }
-                          }
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Text(
-                              "Search",
-                              style:
-                                  TextStyle(fontSize: 14, color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ),
+                      // InkWell(
+                      //   onTap: () {
+                      //     FocusScope.of(context).unfocus();
+                      //     setState(() {
+                      //       counter = 0;
+                      //     });
+                      //     if (searchText.text.toString().trim().isEmpty ||
+                      //         searchText.text.toString().toString().length ==
+                      //             0) {
+                      //       FocusScope.of(context).unfocus();
+                      //       setState(() {
+                      //         _searchResult.clear();
+                      //         _searchResult.addAll(_emplist);
+                      //         isListing = true;
+                      //       });
+                      //     } else {
+                      //       setState(() {
+                      //         isListing = false;
+                      //       });
+                      //       if (searchText.text.contains(RegExp(r'[0-9]'))) {
+                      //         employeelistbynameormobile(
+                      //             "", searchText.text.toString());
+                      //       } else {
+                      //         employeelistbynameormobile(
+                      //             searchText.text.toString(), "");
+                      //       }
+                      //     }
+                      //   },
+                      //   child: Container(
+                      //     decoration: BoxDecoration(
+                      //         color: Colors.black,
+                      //         borderRadius: BorderRadius.circular(10)),
+                      //     child: Padding(
+                      //       padding: const EdgeInsets.all(5.0),
+                      //       child: Text(
+                      //         "Search",
+                      //         style:
+                      //             TextStyle(fontSize: 14, color: Colors.white),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                       SizedBox(
                         width: 10,
                       ),
@@ -304,7 +305,21 @@ class _EmployeeDirectoryScreenState extends State<EmployeeDirectoryScreen> {
                               builder: (context) =>
                                   StatefulBuilder(builder: (context, setState) {
                                     return AlertDialog(
-                                        title: Text("Select"),
+                                        title: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text("Select"),
+                                            IconButton(
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                                icon: Icon(
+                                                  Icons.clear,
+                                                  color: Colors.red,
+                                                ))
+                                          ],
+                                        ),
                                         content: Container(
                                           height: MediaQuery.of(context)
                                                   .size
@@ -490,7 +505,7 @@ class _EmployeeDirectoryScreenState extends State<EmployeeDirectoryScreen> {
               listCheck == false
                   ? Expanded(
                       child: Center(
-                      child: Text("Data not found"),
+                      child: CircularProgressIndicator(),
                     ))
                   : Expanded(
                       //height: MediaQuery.of(context).size.height * 0.69,

@@ -8,11 +8,11 @@ class LeaveStatusListData {
 
   LeaveStatusListData(
       {this.success,
-        this.status,
-        this.message,
-        this.error,
-        this.timestamp,
-        this.data});
+      this.status,
+      this.message,
+      this.error,
+      this.timestamp,
+      this.data});
 
   LeaveStatusListData.fromJson(Map<String, dynamic> json) {
     success = json['success'];
@@ -56,15 +56,15 @@ class LeaveStatusData {
 
   LeaveStatusData(
       {this.id,
-        this.empId,
-        this.branchId,
-        this.empHalfDayDate,
-        this.empHalfDayType,
-        this.empFullDay,
-        this.empFulldayFromdate,
-        this.empFulldayTodate,
-        this.empReasonforleave,
-        this.leaveStatus});
+      this.empId,
+      this.branchId,
+      this.empHalfDayDate,
+      this.empHalfDayType,
+      this.empFullDay,
+      this.empFulldayFromdate,
+      this.empFulldayTodate,
+      this.empReasonforleave,
+      this.leaveStatus});
 
   LeaveStatusData.fromJson(Map<String, dynamic> json) {
     id = json['id'];

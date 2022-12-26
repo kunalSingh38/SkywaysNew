@@ -235,7 +235,11 @@ class _LeaveStatusScreenState extends State<LeaveStatusScreen> {
                                                           MainAxisAlignment
                                                               .center,
                                                       children: <Widget>[
-                                                        Text(empname,
+                                                        Text(
+                                                            empname +
+                                                                "( " +
+                                                                empid +
+                                                                " )",
                                                             style: const TextStyle(
                                                                 color: Colors
                                                                     .black,
@@ -341,6 +345,7 @@ class _LeaveStatusScreenState extends State<LeaveStatusScreen> {
       Uri.parse(BASE_URL + leavelistUrl),
       body: body,
     );
+    print(response.body);
     if (response.statusCode == 200) {
       Iterable list = json.decode(response.body)['data'];
       List<LeaveStatusData> leavestatuslist =

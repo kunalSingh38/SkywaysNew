@@ -124,7 +124,9 @@ class _LeaveRequestScreenState extends State<LeaveRequestScreen> {
                                     list[index].empFulldayFromdate,
                                     list[index].empHalfDayDate,
                                     list[index].empReasonforleave,
-                                    list[index].empHalfDayType);
+                                    list[index].empHalfDayType,
+                                    list[index].empName,
+                                    list[index].leaveBalance.toString());
                               },
                             );
                           }
@@ -148,7 +150,9 @@ class _LeaveRequestScreenState extends State<LeaveRequestScreen> {
       String fulldayfromdate,
       String halfdaydate,
       String leavereason,
-      String halfdatetype) {
+      String halfdatetype,
+      String empName,
+      String leaveBal) {
     return Padding(
       padding: EdgeInsets.all(4.0),
       child: Card(
@@ -159,6 +163,28 @@ class _LeaveRequestScreenState extends State<LeaveRequestScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              Row(
+                children: [
+                  const Text("Employee Name : ",
+                      style: TextStyle(
+                          fontSize: 14.0, fontWeight: FontWeight.w500)),
+                  Text(empName,
+                      style:
+                          const TextStyle(fontSize: 14.0, color: Colors.black))
+                ],
+              ),
+              SizedBox(height: 15),
+              Row(
+                children: [
+                  const Text("Leave bal : ",
+                      style: TextStyle(
+                          fontSize: 14.0, fontWeight: FontWeight.w500)),
+                  Text(leaveBal,
+                      style:
+                          const TextStyle(fontSize: 14.0, color: Colors.black))
+                ],
+              ),
+              SizedBox(height: 15),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -320,6 +346,7 @@ class _LeaveRequestScreenState extends State<LeaveRequestScreen> {
       Uri.parse(BASE_URL + pendingleavelistUrl),
       body: body,
     );
+    print(response.body);
     if (response.statusCode == 200) {
       Iterable list = json.decode(response.body)['data'];
       List<PendingData> leavestatuslist =

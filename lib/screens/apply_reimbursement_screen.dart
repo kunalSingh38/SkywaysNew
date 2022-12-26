@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:connectivity/connectivity.dart';
-import 'package:file_picker/file_picker.dart';
+// import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -373,9 +373,11 @@ class _ApplyReimbursementScreenState extends State<ApplyReimbursementScreen> {
                                                     style: TextStyle(
                                                         color: Colors.grey[600],
                                                         fontSize: 14.0))),
-                                            RaisedButton(
-                                                color: Colors.grey,
-                                                elevation: 0,
+                                            ElevatedButton(
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStateProperty
+                                                            .all(Colors.grey)),
                                                 child: Text("Browse",
                                                     style: TextStyle(
                                                         color:
@@ -439,7 +441,7 @@ class _ApplyReimbursementScreenState extends State<ApplyReimbursementScreen> {
                                       color: kPrimaryColor,
                                       borderRadius: BorderRadius.circular(25),
                                     ),
-                                    child: FlatButton(
+                                    child: ElevatedButton(
                                       onPressed: () {
                                         if (expensetype.toString() == "" ||
                                             expensetype == null) {

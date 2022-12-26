@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 // import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:skyways_group/constants/constant.dart';
 import 'package:skyways_group/screens/birthday_and_anniversary_screen.dart';
@@ -17,6 +18,12 @@ import 'package:skyways_group/screens/workanniversary_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await FlutterDownloader.initialize(debug: true);
+  await FlutterDownloader.initialize(
+      debug:
+          true, // optional: set to false to disable printing logs to console (default: true)
+      ignoreSsl:
+          true // option: set to false to disable working with http links (default: false)
+      );
   runApp(const MyApp());
 }
 

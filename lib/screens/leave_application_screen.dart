@@ -275,7 +275,7 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
     );
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       body: Stack(
         children: [
           Positioned(
@@ -986,6 +986,63 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                                                     .height *
                                                 0.03),
                                         Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 10.0,
+                                              right: 10.0,
+                                              bottom: 30),
+                                          child: Container(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.07,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            child: Card(
+                                              color: Colors.grey.shade300,
+                                              elevation: 4.0,
+                                              child: Container(
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.07,
+                                                  width: double.infinity,
+                                                  decoration: BoxDecoration(
+                                                      color:
+                                                          Colors.grey.shade300,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              15)),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 10.0),
+                                                    child: Row(
+                                                      children: [
+                                                        empbranch == "" ||
+                                                                empbranch ==
+                                                                    null
+                                                            ? const SizedBox()
+                                                            : Expanded(
+                                                                child: Text(
+                                                                  empbranch,
+                                                                  style: const TextStyle(
+                                                                      color: Colors
+                                                                          .black),
+                                                                ),
+                                                              ),
+                                                      ],
+                                                    ),
+                                                  )),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.03),
+                                        Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: Container(
                                             height: 45.0,
@@ -995,7 +1052,7 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                                               borderRadius:
                                                   BorderRadius.circular(25),
                                             ),
-                                            child: FlatButton(
+                                            child: ElevatedButton(
                                               onPressed: () {
                                                 if (reasonController.text
                                                     .toString()
@@ -1020,47 +1077,6 @@ class _LeaveApplicationScreenState extends State<LeaveApplicationScreen> {
                                         ),
                                       ],
                                     ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 10.0, right: 10.0, bottom: 30),
-                                child: Container(
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.07,
-                                  width: MediaQuery.of(context).size.width,
-                                  child: Card(
-                                    color: Colors.grey.shade300,
-                                    elevation: 4.0,
-                                    child: Container(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.07,
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                            color: Colors.grey.shade300,
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 10.0),
-                                          child: Row(
-                                            children: [
-                                              empbranch == "" ||
-                                                      empbranch == null
-                                                  ? const SizedBox()
-                                                  : Expanded(
-                                                      child: Text(
-                                                        empbranch,
-                                                        style: const TextStyle(
-                                                            color:
-                                                                Colors.black),
-                                                      ),
-                                                    ),
-                                            ],
-                                          ),
-                                        )),
                                   ),
                                 ),
                               ),

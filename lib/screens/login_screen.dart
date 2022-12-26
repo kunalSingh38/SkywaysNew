@@ -248,7 +248,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           color: kPrimaryColor,
                           borderRadius: BorderRadius.circular(25),
                         ),
-                        child: FlatButton(
+                        child: ElevatedButton(
                           onPressed: () {
                             if (usernameController.text.toString().isEmpty) {
                               Fluttertoast.showToast(
@@ -329,8 +329,11 @@ class _LoginScreenState extends State<LoginScreen> {
         Uri.parse(BASE_URL + loginUrl),
         body: body,
       );
+      print(BASE_URL + loginUrl);
+      print(jsonEncode(body));
+      print(response.body);
+
       if (response.statusCode == 200) {
-        print(response.body);
         setState(() {
           Future.delayed(Duration(seconds: 1)).then((value) {
             pr.hide().whenComplete(() {

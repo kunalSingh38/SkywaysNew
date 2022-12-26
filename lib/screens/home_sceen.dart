@@ -33,7 +33,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int pageIndex = 0;
 
-  String name;
+  String name = "";
   String photo = "";
   bool checksupervisor = false;
 
@@ -100,8 +100,8 @@ class _HomeScreenState extends State<HomeScreen> {
               Positioned(
                   left: 0.0,
                   right: 0.0,
-                  child:
-                  Image.asset('assets/images/new_bg_home.jpg', fit: BoxFit.fill)),
+                  child: Image.asset('assets/images/new_bg_home.jpg',
+                      fit: BoxFit.fill)),
               Padding(
                 padding: EdgeInsets.only(
                     top: MediaQuery.of(context).size.height * 0.04),
@@ -129,15 +129,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                         color: Colors.black, fontSize: 14.0)),
                                 name == "" || name == null
                                     ? const Text("Guest",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 16.0,
-                                        fontWeight: FontWeight.bold))
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.bold))
                                     : Text(name,
-                                    style: const TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 16.0,
-                                        fontWeight: FontWeight.bold))
+                                        style: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.bold))
                               ],
                             ),
                           ),
@@ -157,58 +157,91 @@ class _HomeScreenState extends State<HomeScreen> {
                                   image: DecorationImage(
                                     fit: BoxFit.fill,
                                     image: photo == "" || photo == null
-                                        ? const AssetImage('assets/images/ic_profile.png')
+                                        ? const AssetImage(
+                                            'assets/images/ic_profile.png')
                                         : NetworkImage(photo),
-                                  )
-                              ),
+                                  )),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    _announcenoticelist.isEmpty || _announcenoticelist.length == 0 ? const SizedBox() : InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(PageRouteBuilder(
-                            transitionDuration: const Duration(milliseconds: 800),
-                            reverseTransitionDuration: const Duration(milliseconds: 800),
-                            opaque: false,
-                            pageBuilder: (context, animation, _) {return AnnouncementScreen();
+                    _announcenoticelist.isEmpty ||
+                            _announcenoticelist.length == 0
+                        ? const SizedBox()
+                        : InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                PageRouteBuilder(
+                                  transitionDuration:
+                                      const Duration(milliseconds: 800),
+                                  reverseTransitionDuration:
+                                      const Duration(milliseconds: 800),
+                                  opaque: false,
+                                  pageBuilder: (context, animation, _) {
+                                    return AnnouncementScreen();
+                                  },
+                                ),
+                              );
                             },
-                          ),
-                        );
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 10.0, top: 5.0, right: 10.0),
-                        child: Container(
-                          height: 100,
-                          width: double.infinity,
-                          child: Card(
-                            elevation: 4.0,
-                            color: Colors.grey.shade100,
                             child: Padding(
-                              padding: const EdgeInsets.only(left: 8.0, top: 4.0, bottom: 4.0, right: 8.0),
-                              child: ListView.separated(
-                                padding: EdgeInsets.zero,
-                                itemCount: _announcenoticelist.length,
-                                separatorBuilder: (BuildContext context, int index) => const Divider(height: 1, color: Colors.grey),
-                                itemBuilder: (BuildContext context, int index) {
-                                   return Column(
-                                     mainAxisAlignment: MainAxisAlignment.start,
-                                     crossAxisAlignment: CrossAxisAlignment.start,
-                                     children: [
-                                       const SizedBox(height: 4.0),
-                                       Text(_announcenoticelist[index]['title'].toString(), style: const TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.w500)),
-                                       Text(_announcenoticelist[index]['desc'].toString(), style: const TextStyle(color: Colors.black, fontSize: 12)),
-                                       const SizedBox(height: 4.0)
-                                     ],
-                                   );
-                                },
+                              padding: const EdgeInsets.only(
+                                  left: 10.0, top: 5.0, right: 10.0),
+                              child: Container(
+                                height: 100,
+                                width: double.infinity,
+                                child: Card(
+                                  elevation: 4.0,
+                                  color: Colors.grey.shade100,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 8.0,
+                                        top: 4.0,
+                                        bottom: 4.0,
+                                        right: 8.0),
+                                    child: ListView.separated(
+                                      padding: EdgeInsets.zero,
+                                      itemCount: _announcenoticelist.length,
+                                      separatorBuilder:
+                                          (BuildContext context, int index) =>
+                                              const Divider(
+                                                  height: 1,
+                                                  color: Colors.grey),
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        return Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            const SizedBox(height: 4.0),
+                                            Text(
+                                                _announcenoticelist[index]
+                                                        ['title']
+                                                    .toString(),
+                                                style: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.w500)),
+                                            Text(
+                                                _announcenoticelist[index]
+                                                        ['desc']
+                                                    .toString(),
+                                                style: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 12)),
+                                            const SizedBox(height: 4.0)
+                                          ],
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                    ),
                     Container(
                       //height: MediaQuery.of(context).size.height * 0.72,
                       width: MediaQuery.of(context).size.width,
@@ -221,8 +254,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Padding(padding: const EdgeInsets.only(left: 20.0, top: 10.0, right: 20.0),
-                              child: ItemInfo(checksupervisor: checksupervisor, title : title)),
+                          Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 20.0, top: 10.0, right: 20.0),
+                              child: ItemInfo(
+                                  checksupervisor: checksupervisor,
+                                  title: title)),
                         ],
                       ),
                     ),
@@ -232,7 +269,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
-        bottomNavigationBar: const CustomBottomNavBar(selectedMenu: MenuState.home),
+        bottomNavigationBar:
+            const CustomBottomNavBar(selectedMenu: MenuState.home),
       ),
     );
   }
@@ -250,8 +288,8 @@ class _HomeScreenState extends State<HomeScreen> {
     if (response.statusCode == 200) {
       print(response.body);
       setState(() {
-          _announcenoticelist.addAll(jsonDecode(response.body)['data']);
-          title = jsonDecode(response.body)['data'][0]['title'].toString();
+        _announcenoticelist.addAll(jsonDecode(response.body)['data']);
+        title = jsonDecode(response.body)['data'][0]['title'].toString();
       });
     } else {
       print(response.body);
@@ -271,7 +309,9 @@ class ItemInfo extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Column(
       children: <Widget>[
-        title.toString() == "" || title.toString() == null ? SizedBox(height: 30) : SizedBox(height: 0),
+        title.toString() == "" || title.toString() == null
+            ? SizedBox(height: 30)
+            : SizedBox(height: 0),
         const Padding(
           padding: EdgeInsets.only(left: 5.0),
           child: Align(
@@ -541,5 +581,4 @@ class ItemInfo extends StatelessWidget {
           )),
     );
   }
-
 }
