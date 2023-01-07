@@ -1,4 +1,4 @@
-package com.management.skyways_group
+package com.management.skywaysgroup
 
 import io.flutter.embedding.android.FlutterActivity
 

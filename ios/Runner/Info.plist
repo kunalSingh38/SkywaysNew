@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Skyways</string>
+	<string>Theo</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -35,11 +35,14 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>camera</string>
 	<key>NSDocumentsFolderUsageDescription</key>
 	<string>application needs Documents access</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>photos</string>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>fetch</string>
 		<string>processing</string>
 		<string>remote-notification</string>
 	</array>
@@ -62,36 +65,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSCameraUsageDescription</key>
-    <string>camera</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-    <string>photos</string>
-	<key>NSAppTransportSecurity</key>
-<dict>
-  <key>NSExceptionDomains</key>
-  <dict>
-    <key>www.yourserver.com</key>
-    <dict>
-      <!-- add this key to enable subdomains such as sub.yourserver.com -->
-      <key>NSIncludesSubdomains</key>
-      <true/>
-      <!-- add this key to allow standard HTTP requests, thus negating the ATS -->
-      <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-      <true/>
-      <!-- add this key to specify the minimum TLS version to accept -->
-      <key>NSTemporaryExceptionMinimumTLSVersion</key>
-      <string>TLSv1.1</string>
-    </dict>
-  </dict>
-</dict>
-<key>NSAppTransportSecurity</key>
-<dict>
-    <key>NSAllowsArbitraryLoads</key><true/>
-</dict>
-<!-- changes this number to configure the maximum number of concurrent tasks -->
-<key>FDMaximumConcurrentTasks</key>
-<integer>5</integer>
-<key>FDAllFilesDownloadedMessage</key>
-<string>All files have been downloaded</string>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+<array>
+    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+</array>
 </dict>
 </plist>

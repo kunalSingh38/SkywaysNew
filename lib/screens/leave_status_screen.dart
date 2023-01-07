@@ -169,12 +169,7 @@ class _LeaveStatusScreenState extends State<LeaveStatusScreen> {
                                     List<LeaveStatusData> list = snapshot.data;
                                     if (!snapshot.hasData) {
                                       return Center(
-                                          child: Container(
-                                              height: 24.0,
-                                              width: 24.0,
-                                              child:
-                                                  const CircularProgressIndicator(
-                                                      color: kPrimaryColor)));
+                                          child: Text("No data found"));
                                     } else {
                                       return ListView.separated(
                                         shrinkWrap: true,
@@ -236,9 +231,11 @@ class _LeaveStatusScreenState extends State<LeaveStatusScreen> {
                                                               .center,
                                                       children: <Widget>[
                                                         Text(
-                                                            empname +
+                                                            list[index]
+                                                                    .empName +
                                                                 "( " +
-                                                                empid +
+                                                                list[index]
+                                                                    .empOfficialId +
                                                                 " )",
                                                             style: const TextStyle(
                                                                 color: Colors
@@ -345,7 +342,6 @@ class _LeaveStatusScreenState extends State<LeaveStatusScreen> {
       Uri.parse(BASE_URL + leavelistUrl),
       body: body,
     );
-    print(response.body);
     if (response.statusCode == 200) {
       Iterable list = json.decode(response.body)['data'];
       List<LeaveStatusData> leavestatuslist =

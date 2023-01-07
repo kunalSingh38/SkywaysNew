@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:skyways_group/api/api_service.dart';
 import 'package:skyways_group/components/coustom_bottom_nav_bar.dart';
@@ -39,7 +40,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String reportingmanager;
 
   bool salaryVisibility = false;
-
+  String appVersion = "";
   @override
   void initState() {
     super.initState();
@@ -48,7 +49,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   _getProfileDetails() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
     setState(() {
+      appVersion = packageInfo.version.toString();
+
       photo = prefs.getString('emp_image');
     });
     final body = {
@@ -296,7 +300,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   height: 10,
                 ),
                 Text(
-                  "Ver: 1.0.4+5",
+                  "Ver: " + appVersion,
                   style: TextStyle(fontSize: 18, color: Colors.grey),
                 )
               ],

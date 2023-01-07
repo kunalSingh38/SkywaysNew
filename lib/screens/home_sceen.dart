@@ -548,11 +548,11 @@ class ItemInfo extends StatelessWidget {
                                   builder: (BuildContext context) =>
                                       BirthdayAnniversaryScreen()));
                         } else {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      ApplyReimbursementScreen()));
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) =>
+                          //             ApplyReimbursementScreen()));
                         }
                       },
                       child: Container(

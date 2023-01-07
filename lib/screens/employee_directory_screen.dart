@@ -299,6 +299,10 @@ class _EmployeeDirectoryScreenState extends State<EmployeeDirectoryScreen> {
                       ),
                       InkWell(
                         onTap: () {
+                          setState(() {
+                            initialcompanyname = null;
+                            initialbranchname = null;
+                          });
                           showDialog(
                               context: context,
                               barrierDismissible: false,
@@ -314,9 +318,16 @@ class _EmployeeDirectoryScreenState extends State<EmployeeDirectoryScreen> {
                                                 onPressed: () {
                                                   Navigator.of(context).pop();
                                                 },
-                                                icon: Icon(
-                                                  Icons.clear,
-                                                  color: Colors.red,
+                                                icon: Container(
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      color: kPrimaryColor),
+                                                  child: Icon(
+                                                    Icons.clear,
+                                                    color: Colors.white,
+                                                  ),
                                                 ))
                                           ],
                                         ),
@@ -505,7 +516,7 @@ class _EmployeeDirectoryScreenState extends State<EmployeeDirectoryScreen> {
               listCheck == false
                   ? Expanded(
                       child: Center(
-                      child: CircularProgressIndicator(),
+                      child: Text("No data found"),
                     ))
                   : Expanded(
                       //height: MediaQuery.of(context).size.height * 0.69,
@@ -634,34 +645,64 @@ class _EmployeeDirectoryScreenState extends State<EmployeeDirectoryScreen> {
                                                 Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
-                                                        builder: (context) => ProfileViewScreen(
-                                                            name: _searchResult[index]
-                                                                .empName,
-                                                            id: _searchResult[index]
-                                                                .empId,
-                                                            photo: _searchResult[index]
-                                                                .empImage,
-                                                            designation:
-                                                                _searchResult[index]
-                                                                    .desigName,
-                                                            department:
-                                                                _searchResult[index]
-                                                                    .deptName,
-                                                            company:
-                                                                _searchResult[index]
-                                                                    .compName,
-                                                            dob: _searchResult[index]
-                                                                .empDob,
-                                                            mobile: _searchResult[index]
-                                                                .empMobile,
-                                                            email: _searchResult[index]
-                                                                .empMail,
-                                                            joiningdate:
-                                                                _searchResult[index]
-                                                                    .empJoinDateDdmmyy,
-                                                            location: _searchResult[index].empAdd1,
-                                                            bloodgroup: _searchResult[index].bloodGroup,
-                                                            dobmonth: _searchResult[index].empDobMonthyear)));
+                                                        builder: (context) =>
+                                                            ProfileViewScreen(
+                                                              name:
+                                                                  _searchResult[
+                                                                          index]
+                                                                      .empName,
+                                                              id: _searchResult[
+                                                                      index]
+                                                                  .empId,
+                                                              photo:
+                                                                  _searchResult[
+                                                                          index]
+                                                                      .empImage,
+                                                              designation:
+                                                                  _searchResult[
+                                                                          index]
+                                                                      .desigName,
+                                                              department:
+                                                                  _searchResult[
+                                                                          index]
+                                                                      .deptName,
+                                                              company:
+                                                                  _searchResult[
+                                                                          index]
+                                                                      .compName,
+                                                              dob:
+                                                                  _searchResult[
+                                                                          index]
+                                                                      .empDob,
+                                                              mobile:
+                                                                  _searchResult[
+                                                                          index]
+                                                                      .empMobile,
+                                                              email:
+                                                                  _searchResult[
+                                                                          index]
+                                                                      .empMail,
+                                                              joiningdate:
+                                                                  _searchResult[
+                                                                          index]
+                                                                      .empJoinDateDdmmyy,
+                                                              location:
+                                                                  _searchResult[
+                                                                          index]
+                                                                      .empAdd1,
+                                                              bloodgroup:
+                                                                  _searchResult[
+                                                                          index]
+                                                                      .bloodGroup,
+                                                              dobmonth:
+                                                                  _searchResult[
+                                                                          index]
+                                                                      .empDobMonthyear,
+                                                              branchName:
+                                                                  _searchResult[
+                                                                          index]
+                                                                      .branchName,
+                                                            )));
                                               },
                                               child: Container(
                                                 height: 25.0,
@@ -734,6 +775,7 @@ class _EmployeeDirectoryScreenState extends State<EmployeeDirectoryScreen> {
         _searchResult.addAll(_employeeslist);
         counter = counter + 8;
       });
+      print(_searchResult[0].toString() + "-----");
       return _employeeslist;
     } else {
       throw Exception('Failed to get data due to ${response.body}');
@@ -767,8 +809,8 @@ class _EmployeeDirectoryScreenState extends State<EmployeeDirectoryScreen> {
       if (response.statusCode == 200) {
         list.clear();
         list = json.decode(response.body)['data'];
+
         var _employeeslist = list.map((m) => Data.fromJson(m)).toList();
-        print(_employeeslist);
         setState(() {
           isLoading = false;
           listCheck = true;

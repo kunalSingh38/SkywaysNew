@@ -48,6 +48,9 @@ class PendingData {
   String empReasonforleave;
   String leaveStatus;
   String empName;
+  String empOfficialId;
+  String clBal;
+  String elBal;
   int leaveBalance;
 
   PendingData(
@@ -62,6 +65,9 @@ class PendingData {
       this.empReasonforleave,
       this.leaveStatus,
       this.empName,
+      this.empOfficialId,
+      this.clBal,
+      this.elBal,
       this.leaveBalance});
 
   PendingData.fromJson(Map<String, dynamic> json) {
@@ -76,6 +82,9 @@ class PendingData {
     empReasonforleave = json['emp_reasonforleave'];
     leaveStatus = json['leave_status'];
     empName = json['empName'];
+    empOfficialId = json['emp_official_id'];
+    clBal = json['cl_bal'];
+    elBal = json['el_bal'];
     leaveBalance = json['leaveBalance'];
   }
 
@@ -92,6 +101,9 @@ class PendingData {
     data['emp_reasonforleave'] = this.empReasonforleave;
     data['leave_status'] = this.leaveStatus;
     data['empName'] = this.empName;
+    data['emp_official_id'] = this.empOfficialId;
+    data['cl_bal'] = this.clBal;
+    data['el_bal'] = this.elBal;
     data['leaveBalance'] = this.leaveBalance;
     return data;
   }

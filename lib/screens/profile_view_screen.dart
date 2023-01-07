@@ -26,6 +26,7 @@ class ProfileViewScreen extends StatefulWidget {
   String email;
   String dobmonth;
   String bloodgroup;
+  String branchName;
 
   ProfileViewScreen(
       {this.name,
@@ -40,7 +41,8 @@ class ProfileViewScreen extends StatefulWidget {
       this.joiningdate,
       this.location,
       this.bloodgroup,
-      this.dobmonth});
+      this.dobmonth,
+      this.branchName});
 
   @override
   _ProfileViewScreenState createState() => _ProfileViewScreenState(
@@ -56,7 +58,8 @@ class ProfileViewScreen extends StatefulWidget {
       joiningdate,
       location,
       bloodgroup,
-      dobmonth);
+      dobmonth,
+      branchName);
 }
 
 class _ProfileViewScreenState extends State<ProfileViewScreen> {
@@ -73,6 +76,7 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
   String location;
   String bloodgroup;
   String dobmonth;
+  String branchName;
 
   _ProfileViewScreenState(
       this.name,
@@ -87,7 +91,8 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
       this.joiningdate,
       this.location,
       this.bloodgroup,
-      this.dobmonth);
+      this.dobmonth,
+      this.branchName);
 
   @override
   void initState() {
@@ -310,6 +315,34 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 14.0)),
                                 Text(department,
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 14.0,
+                                        fontWeight: FontWeight.bold))
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 20, top: 10, right: 20),
+                        child: Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                              color: Colors.grey.shade200,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(8.0))),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text("Branch Name",
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 14.0)),
+                                Text(branchName,
                                     textAlign: TextAlign.center,
                                     style: const TextStyle(
                                         color: Colors.black,

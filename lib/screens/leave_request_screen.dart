@@ -126,7 +126,10 @@ class _LeaveRequestScreenState extends State<LeaveRequestScreen> {
                                     list[index].empReasonforleave,
                                     list[index].empHalfDayType,
                                     list[index].empName,
-                                    list[index].leaveBalance.toString());
+                                    list[index].leaveBalance.toString(),
+                                    list[index].clBal.toString(),
+                                    list[index].elBal.toString(),
+                                    list[index].empOfficialId.toString());
                               },
                             );
                           }
@@ -152,7 +155,10 @@ class _LeaveRequestScreenState extends State<LeaveRequestScreen> {
       String leavereason,
       String halfdatetype,
       String empName,
-      String leaveBal) {
+      String leaveBal,
+      String clBal,
+      String elBal,
+      String empOfficialId) {
     return Padding(
       padding: EdgeInsets.all(4.0),
       child: Card(
@@ -176,10 +182,19 @@ class _LeaveRequestScreenState extends State<LeaveRequestScreen> {
               SizedBox(height: 15),
               Row(
                 children: [
-                  const Text("Leave bal : ",
+                  const Text("CL Leave bal : ",
                       style: TextStyle(
                           fontSize: 14.0, fontWeight: FontWeight.w500)),
-                  Text(leaveBal,
+                  Text(double.parse(clBal).toStringAsFixed(0).toString(),
+                      style:
+                          const TextStyle(fontSize: 14.0, color: Colors.black)),
+                  SizedBox(
+                    width: 52,
+                  ),
+                  const Text("EL Leave bal : ",
+                      style: TextStyle(
+                          fontSize: 14.0, fontWeight: FontWeight.w500)),
+                  Text(double.parse(elBal).toStringAsFixed(0).toString(),
                       style:
                           const TextStyle(fontSize: 14.0, color: Colors.black))
                 ],
@@ -193,7 +208,7 @@ class _LeaveRequestScreenState extends State<LeaveRequestScreen> {
                       const Text("Employee ID : ",
                           style: TextStyle(
                               fontSize: 14.0, fontWeight: FontWeight.w500)),
-                      Text(empid,
+                      Text(empOfficialId,
                           style: const TextStyle(
                               fontSize: 14.0, color: Colors.black))
                     ],

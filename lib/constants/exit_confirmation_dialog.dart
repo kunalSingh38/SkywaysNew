@@ -40,39 +40,30 @@ class ExitConfirmationDialog extends StatelessWidget {
               height: 24,
             ),
             Text(
-              'Are you sure?',
+              'Do you want to exit the application?',
+              textAlign: TextAlign.center,
               style: TextStyle(
                   fontSize: 20,
                   color: Colors.white,
                   fontWeight: FontWeight.bold),
             ),
-            SizedBox(
-              height: 8,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(right: 16, left: 16),
-              child: Text(
-                'Do you really want to exit from application?',
-                style: TextStyle(color: Colors.white),
-                textAlign: TextAlign.center,
-              ),
-            ),
+            // SizedBox(
+            //   height: 8,
+            // ),
+            // const Padding(
+            //   padding: EdgeInsets.only(right: 16, left: 16),
+            //   child: Text(
+            //     'Do you really want to exit from application?',
+            //     style: TextStyle(color: Colors.white),
+            //     textAlign: TextAlign.center,
+            //   ),
+            // ),
             SizedBox(
               height: 24,
             ),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text(
-                    'No',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-                SizedBox(width: 8),
                 ElevatedButton(
                   onPressed: () {
                     return exit(0);
@@ -84,7 +75,19 @@ class ExitConfirmationDialog extends StatelessWidget {
                   ),
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(Colors.white)),
-                )
+                ),
+                SizedBox(width: 8),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.grey)),
+                  child: Text(
+                    'No',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
               ],
             )
           ],

@@ -53,6 +53,8 @@ class LeaveStatusData {
   String empFulldayTodate;
   String empReasonforleave;
   String leaveStatus;
+  String empOfficialId;
+  String empName;
 
   LeaveStatusData(
       {this.id,
@@ -64,7 +66,9 @@ class LeaveStatusData {
       this.empFulldayFromdate,
       this.empFulldayTodate,
       this.empReasonforleave,
-      this.leaveStatus});
+      this.leaveStatus,
+      this.empOfficialId,
+      this.empName});
 
   LeaveStatusData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -77,6 +81,8 @@ class LeaveStatusData {
     empFulldayTodate = json['emp_fullday_todate'];
     empReasonforleave = json['emp_reasonforleave'];
     leaveStatus = json['leave_status'];
+    empOfficialId = json['emp_official_id'];
+    empName = json['emp_name'];
   }
 
   Map<String, dynamic> toJson() {
@@ -91,6 +97,8 @@ class LeaveStatusData {
     data['emp_fullday_todate'] = this.empFulldayTodate;
     data['emp_reasonforleave'] = this.empReasonforleave;
     data['leave_status'] = this.leaveStatus;
+    data['emp_official_id'] = this.empOfficialId;
+    data['emp_name'] = this.empName;
     return data;
   }
 }

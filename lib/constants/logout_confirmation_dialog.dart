@@ -27,8 +27,12 @@ class LogoutConfirmationDialog extends StatelessWidget {
             Container(
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
-                child: Image.asset('assets/images/new_logo.png',
-                    height: 60, width: 60, fit: BoxFit.fitHeight),
+                child: Image.asset(
+                  'assets/images/new_logo.png',
+                  height: 60,
+                  width: 60,
+                  fit: BoxFit.fitHeight,
+                ),
               ),
               width: double.infinity,
               decoration: const BoxDecoration(
@@ -42,31 +46,25 @@ class LogoutConfirmationDialog extends StatelessWidget {
               height: 24,
             ),
             Text(
-              'Are you sure?',
+              'Do you want to logout?',
               style: TextStyle(
                   fontSize: 20,
                   color: Colors.white,
                   fontWeight: FontWeight.bold),
             ),
-            SizedBox(
-              height: 8,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(right: 16, left: 16),
-              child: Text('Do you really want to logout from application?',
-                  style: TextStyle(color: Colors.white),
-                  textAlign: TextAlign.center),
-            ),
+            // SizedBox(
+            //   height: 8,
+            // ),
+            // const Padding(
+            //   padding: EdgeInsets.only(right: 16, left: 16),
+            //   child: Text('Do you really want to logout from application?',
+            //       style: TextStyle(color: Colors.white),
+            //       textAlign: TextAlign.center),
+            // ),
             SizedBox(height: 24),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text('No', style: TextStyle(color: Colors.white))),
-                SizedBox(width: 8),
                 ElevatedButton(
                   onPressed: () async {
                     SharedPreferences prefs =
@@ -83,7 +81,16 @@ class LogoutConfirmationDialog extends StatelessWidget {
                   ),
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(Colors.white)),
-                )
+                ),
+                SizedBox(width: 8),
+                ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.grey)),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('No', style: TextStyle(color: Colors.white))),
               ],
             )
           ],
